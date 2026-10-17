@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import { initDb } from "./config/db.js";
+import apiRoutes from "./routes/apiRoutes.js";
 import itemRoutes from "./routes/itemRoutes.js";
 
 dotenv.config();
@@ -29,7 +30,10 @@ app.get("/api/health", (req, res) => {
   });
 });
 
-// API Routes
+// Mount Routes matching schema.md (Product, User, Order)
+app.use("/api", apiRoutes);
+
+// Retain legacy itemRoutes for compatibility
 app.use("/api", itemRoutes);
 
 // 404 Handler
@@ -54,9 +58,10 @@ async function startServer() {
   await initDb();
   app.listen(PORT, () => {
     console.log(`🚀 Server running on http://localhost:${PORT}`);
-    console.log(`📡 API Endpoints available at http://localhost:${PORT}/api/items`);
+    console.log(`📡 Products API: http://localhost:${PORT}/api/products`);
+    console.log(`📡 Users API: http://localhost:${PORT}/api/users`);
+    console.log(`📡 Orders API: http://localhost:${PORT}/api/orders`);
   });
 }
 
 startServer();
-

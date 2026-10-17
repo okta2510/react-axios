@@ -32,15 +32,15 @@ body {
 }
 
 .app-wrapper {
-  max-width: 800px;
+  max-width: 860px;
   margin: 0 auto;
-  padding: 2.5rem 1.25rem;
+  padding: 2rem 1.25rem;
 }
 
 /* Header */
 .app-header {
   text-align: center;
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
 }
 
 .header-badges {
@@ -48,6 +48,7 @@ body {
   justify-content: center;
   gap: 0.5rem;
   margin-bottom: 0.75rem;
+  flex-wrap: wrap;
 }
 
 .badge {
@@ -78,16 +79,60 @@ body {
 }
 
 .app-header h1 {
-  font-size: 2.25rem;
+  font-size: 2.15rem;
   font-weight: 700;
   letter-spacing: -0.025em;
   color: var(--text-main);
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.35rem;
 }
 
 .app-header p {
   color: var(--text-muted);
-  font-size: 1rem;
+  font-size: 0.95rem;
+}
+
+/* Navigation Tabs */
+.nav-tabs {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 0.5rem;
+}
+
+.nav-tab-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.65rem 1.15rem;
+  border-radius: 8px;
+  border: none;
+  background: transparent;
+  color: var(--text-muted);
+  font-family: inherit;
+  font-size: 0.925rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.nav-tab-btn:hover {
+  background-color: #f1f5f9;
+  color: var(--text-main);
+}
+
+.nav-tab-btn.active {
+  background-color: var(--primary-light);
+  color: var(--primary);
+}
+
+.tab-badge {
+  background-color: var(--primary);
+  color: white;
+  border-radius: 9999px;
+  font-size: 0.7rem;
+  padding: 0.1rem 0.45rem;
+  font-weight: 700;
 }
 
 /* Cards */
@@ -145,10 +190,6 @@ body {
   align-items: center;
 }
 
-.alert-close:hover {
-  opacity: 1;
-}
-
 /* Form */
 .item-form .form-header {
   display: flex;
@@ -175,6 +216,7 @@ body {
 }
 
 .form-group input,
+.form-group select,
 .form-group textarea {
   width: 100%;
   padding: 0.7rem 0.9rem;
@@ -188,6 +230,7 @@ body {
 }
 
 .form-group input:focus,
+.form-group select:focus,
 .form-group textarea:focus {
   outline: none;
   border-color: var(--primary);
@@ -238,7 +281,7 @@ body {
 }
 
 .btn-sm {
-  padding: 0.35rem 0.75rem;
+  padding: 0.4rem 0.8rem;
   font-size: 0.825rem;
 }
 
@@ -253,6 +296,10 @@ body {
   align-items: center;
   justify-content: center;
   transition: all 0.15s ease;
+}
+
+.btn-icon:hover {
+  background-color: #f8fafc;
 }
 
 .btn-edit:hover {
@@ -283,18 +330,18 @@ body {
 .items-grid {
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  gap: 0.85rem;
 }
 
 .item-card {
   background: #ffffff;
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  padding: 1rem 1.25rem;
+  padding: 1.15rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 1rem;
+  gap: 1.25rem;
   box-shadow: var(--shadow-sm);
   transition: all 0.2s ease;
 }
@@ -304,50 +351,11 @@ body {
   box-shadow: var(--shadow-md);
 }
 
-.item-card.is-completed {
-  background-color: #f8fafc;
-  border-color: #e2e8f0;
-}
-
-.item-card.is-completed .item-title {
-  text-decoration: line-through;
-  color: var(--text-muted);
-}
-
-.item-card.is-completed .item-description {
-  opacity: 0.7;
-}
-
 .item-main {
   display: flex;
   align-items: flex-start;
-  gap: 0.85rem;
+  gap: 1rem;
   flex: 1;
-}
-
-.toggle-check {
-  width: 22px;
-  height: 22px;
-  border-radius: 6px;
-  border: 2px solid #cbd5e1;
-  background: white;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: 2px;
-  flex-shrink: 0;
-  transition: all 0.15s ease;
-}
-
-.toggle-check:hover {
-  border-color: var(--success);
-}
-
-.toggle-check.checked {
-  background-color: var(--success);
-  border-color: var(--success);
-  color: white;
 }
 
 .item-details {
@@ -355,7 +363,7 @@ body {
 }
 
 .item-title {
-  font-size: 1rem;
+  font-size: 1.05rem;
   font-weight: 600;
   color: var(--text-main);
   margin-bottom: 0.2rem;
@@ -410,3 +418,25 @@ body {
   }
 }
 
+/* Modal Dialog */
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 1rem;
+}
+
+.modal-content {
+  width: 100%;
+  max-width: 480px;
+  background: white;
+  margin: 0;
+}
